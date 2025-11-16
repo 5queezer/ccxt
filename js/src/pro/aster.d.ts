@@ -1,0 +1,41 @@
+import asterRest from '../aster.js';
+import type { Int, OHLCV, Str, Strings, OrderBook, Order, Trade, Ticker, Tickers, Position, Balances } from '../base/types.js';
+import Client from '../base/ws/Client.js';
+export default class aster extends asterRest {
+    describe(): any;
+    watchOrderBook(symbol: string, limit?: Int, params?: {}): Promise<OrderBook>;
+    handleOrderBook(client: Client, message: any): void;
+    watchTrades(symbol: string, since?: Int, limit?: Int, params?: {}): Promise<Trade[]>;
+    watchTradesForSymbols(symbols: string[], since?: Int, limit?: Int, params?: {}): Promise<Trade[]>;
+    handleTrades(client: Client, message: any): void;
+    parseWsTrade(trade: any, market?: any): Trade;
+    watchTicker(symbol: string, params?: {}): Promise<Ticker>;
+    watchTickers(symbols?: Strings, params?: {}): Promise<Tickers>;
+    handleTicker(client: Client, message: any): void;
+    handleTickers(client: Client, message: any): void;
+    parseWsTicker(ticker: any, market?: any): Ticker;
+    watchOHLCV(symbol: string, timeframe?: string, since?: Int, limit?: Int, params?: {}): Promise<OHLCV[]>;
+    handleOHLCV(client: Client, message: any): void;
+    watchBalance(params?: {}): Promise<Balances>;
+    handleBalance(client: Client, message: any): void;
+    watchOrders(symbol?: Str, since?: Int, limit?: Int, params?: {}): Promise<Order[]>;
+    handleOrder(client: Client, message: any): void;
+    parseWsOrder(order: any, market?: any): Order;
+    watchMyTrades(symbol?: Str, since?: Int, limit?: Int, params?: {}): Promise<Trade[]>;
+    handleMyTrade(client: Client, message: any): void;
+    parseWsMyTrade(trade: any, market?: any): Trade;
+    watchPositions(symbols?: Strings, since?: Int, limit?: Int, params?: {}): Promise<Position[]>;
+    handlePosition(client: Client, message: any): void;
+    parseWsPosition(position: any, market?: any): Position;
+    authenticate(params?: {}): Promise<string>;
+    keepAliveListenKey(params?: {}): Promise<void>;
+    handleMessage(client: Client, message: any): void;
+    handleAccountUpdate(client: Client, message: any): void;
+    handleOrderUpdate(client: Client, message: any): void;
+    ping(client: Client): {
+        method: string;
+    };
+    handlePong(client: Client, message: any): any;
+    handleErrorMessage(client: Client, message: any): any;
+    requestId(): any;
+}
